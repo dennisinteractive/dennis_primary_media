@@ -34,8 +34,8 @@ function dennis_primary_media_field_group_pre_render(&$element, $group, &$form) 
   foreach ($element as $key => $field) {
     if (!empty($field)) {
       $element = array_intersect_key($element, array($key => $field));
-      // Add active primary media field class to group
-      $group->format_settings['instance_settings']['classes'] .= ' primary-media-active-' . str_replace('_', '-', $field['#field_name']);
+      // Add active primary media field class to group.
+      $group->format_settings['instance_settings']['classes'] .= ' primary-media-active-' . drupal_html_class($field['#field_name']);
       break;
     }
   }
