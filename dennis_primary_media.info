@@ -1,0 +1,5 @@
+name = Dennis Primary Media
+description = Fieldgroup formatter to display only the first field that has content in a group
+core = 7.x
+package = Dennis Distro (Core)
+dependencies[] = field_group
