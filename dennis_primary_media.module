@@ -20,9 +20,9 @@ function dennis_primary_media_field_group_formatter_info() {
 }
 
 /**
- * Implements hook_field_group_pre_render().
+ * Implements hook_field_group_pre_render_alter().
  */
-function dennis_primary_media_field_group_pre_render(&$element, $group, &$form) {
+function dennis_primary_media_field_group_pre_render_alter(&$element, $group, &$form) {
   // We only process the 'primary-media' group type.
   if ($group->format_type != 'primary-media') {
     return;
@@ -32,8 +32,9 @@ function dennis_primary_media_field_group_pre_render(&$element, $group, &$form) 
   uasort($element, 'element_sort');
   // Remove all elements except for first field that has content.
   foreach ($element as $key => $field) {
-    if (!empty($field)) {
+    if (!empty($field) && isset($field['#field_name'])) {
       $element = array_intersect_key($element, array($key => $field));
+
       // Add active primary media field class to group.
       $group->format_settings['instance_settings']['classes'] .= ' primary-media-active-' . drupal_html_class($field['#field_name']);
       break;
